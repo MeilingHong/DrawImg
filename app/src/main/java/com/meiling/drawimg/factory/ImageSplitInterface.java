@@ -1,5 +1,6 @@
 package com.meiling.drawimg.factory;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 
@@ -25,7 +26,7 @@ public interface ImageSplitInterface {
      * @param splitList 分割后的矩形列表
      * @return 返回分割后生成的Bitmap
      */
-    public abstract Bitmap generateSplitRectangleBitmap(List<RectF> splitList);
+    public abstract Bitmap generateSplitRectangleBitmap(Context mContext,List<RectF> splitList);
 
     /**
      * @param bgBitmap 背景图

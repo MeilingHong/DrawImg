@@ -1,7 +1,11 @@
 package com.meiling.drawimg.factory.impl;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.RectF;
+import android.widget.ImageView;
 
 import com.meiling.drawimg.factory.ImageSplitInterface;
 
@@ -81,8 +85,8 @@ public class SplitImage423Impl implements ImageSplitInterface {
         float baseLine = (isWidth ? rectF.width() : rectF.height()) / 2F;
         float startPoint = isWidth ? rectF.left : rectF.top;// 起始点
         float random = baseLine + baseLine * 0.4F * new Random().nextFloat();
-        RectF split1 = new RectF(rectF.left, rectF.top, (isWidth ? (startPoint + random - halfLine) : rectF.right), (isWidth ? rectF.bottom : (startPoint + random - halfLine)));
-        RectF split2 = new RectF((isWidth ? (startPoint + random + halfLine) : rectF.right), (isWidth ? rectF.bottom : (startPoint + random + halfLine)), rectF.right, rectF.bottom);
+        RectF split1 = new RectF((int) rectF.left, (int) rectF.top, (int) (isWidth ? (startPoint + random - halfLine) : rectF.right), (int) (isWidth ? rectF.bottom : (startPoint + random - halfLine)));
+        RectF split2 = new RectF((int) (isWidth ? (startPoint + random + halfLine) : rectF.right), (int) (isWidth ? rectF.bottom : (startPoint + random + halfLine)), (int) rectF.right, (int) rectF.bottom);
         List<RectF> arrayList = new ArrayList<>();
         arrayList.add(split1);
         arrayList.add(split2);
@@ -91,7 +95,17 @@ public class SplitImage423Impl implements ImageSplitInterface {
     }
 
     @Override
-    public Bitmap generateSplitRectangleBitmap(List<RectF> splitList) {
+    public Bitmap generateSplitRectangleBitmap(Context mContext, List<RectF> splitList) {
+        ImageView imageView = new ImageView(mContext);
+        Canvas canvas = new Canvas();
+        Paint paint = new Paint();
+        paint.setColor(0xff1c1c1e);
+        paint.setAntiAlias(true);
+        paint.setStrokeWidth(0.000001F);
+        paint.setStyle(Paint.Style.STROKE);
+        for (RectF temp : splitList) {
+            canvas.drawRect(temp, paint);
+        }
         return null;
     }
 
