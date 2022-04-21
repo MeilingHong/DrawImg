@@ -7,7 +7,19 @@ import android.graphics.RectF;
  *
  * @author marisareimu
  */
-class SplitEntity {
+public class SplitEntity {
+    public SplitEntity() {
+    }
+
+    public SplitEntity(RectF rectF) {
+        this.rectF = rectF;
+    }
+
+    public SplitEntity(RectF rectF, int color) {
+        this.rectF = rectF;
+        this.color = color;
+    }
+
     // 用于分割的对象
     public RectF rectF;// 显示的矩形
     public int color;// 矩形需要填充的颜色

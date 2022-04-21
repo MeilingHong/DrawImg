@@ -4,21 +4,23 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.meiling.drawimg.widget.split.box.SplitEntity;
+
 import java.util.List;
 
 public class RectangleView extends View {
 
     @Nullable
-    private List<RectF> mDrawItemDataArray;
-
+    private List<SplitEntity> mDrawItemDataArray;
     private final Paint mPaint;
+    private Gson mGson = new Gson();
 
     public RectangleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -35,13 +37,14 @@ public class RectangleView extends View {
         if (mDrawItemDataArray == null || mDrawItemDataArray.isEmpty()) {
             return;
         }
-        for (RectF drawItemData : mDrawItemDataArray) {
-            mPaint.setColor(Color.GRAY);
-            canvas.drawRect(drawItemData, mPaint);
+        for (SplitEntity temp : mDrawItemDataArray) {
+            mPaint.setColor(temp.color);
+            canvas.drawRect(temp.rectF, mPaint);
+            Log.e("AndroidRuntime", "index:" + "<-->" + mGson.toJson(temp) + "<--->" + mPaint.getColor());
         }
     }
 
-    public void setDrawItemDataArray(@Nullable List<RectF> drawItemDataArray) {
+    public void setDrawItemDataArray(@Nullable List<SplitEntity> drawItemDataArray) {
         this.mDrawItemDataArray = drawItemDataArray;
         invalidate();
     }
