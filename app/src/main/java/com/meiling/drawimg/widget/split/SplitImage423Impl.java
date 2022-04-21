@@ -83,8 +83,14 @@ public class SplitImage423Impl implements ImageSplitInterface {
         float baseLine = (isWidth ? rectF.width() : rectF.height()) / 2F;
         float startPoint = isWidth ? rectF.left : rectF.top;// 起始点
         float random = baseLine + baseLine * 0.4F * new Random().nextFloat();
-        RectF split1 = new RectF((int) rectF.left, (int) rectF.top, (int) (isWidth ? (startPoint + random - halfLine) : rectF.right), (int) (isWidth ? rectF.bottom : (startPoint + random - halfLine)));
-        RectF split2 = new RectF((int) (isWidth ? (startPoint + random + halfLine) : rectF.right), (int) (isWidth ? rectF.bottom : (startPoint + random + halfLine)), (int) rectF.right, (int) rectF.bottom);
+        RectF split1 = new RectF((int) rectF.left,
+                (int) rectF.top,
+                (int) (isWidth ? (startPoint + random - halfLine) : rectF.right),
+                (int) (isWidth ? rectF.bottom : (startPoint + random - halfLine)));
+        RectF split2 = new RectF((int) (isWidth ? (startPoint + random + halfLine) : rectF.left),
+                (int) (isWidth ? rectF.top : (startPoint + random + halfLine)),
+                (int) rectF.right,
+                (int) rectF.bottom);
         List<RectF> arrayList = new ArrayList<>();
         arrayList.add(split1);
         arrayList.add(split2);

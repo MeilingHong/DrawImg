@@ -1,15 +1,12 @@
 package com.meiling.drawimg;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.meiling.drawimg.widget.mondrian.LogicHelper;
 import com.meiling.drawimg.widget.split.RectangleView;
 import com.meiling.drawimg.widget.split.SplitImage1Impl;
 
@@ -35,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
             splitImage = new SplitImage1Impl();
         }
         final int width = 1024;
-        final int height = 1048;
+        final int height = 1024;
         show.setDrawItemDataArray(splitImage.generateSplitRectangle(
                 width,
                 height,
                 10,
-                Math.min(Integer.parseInt(splitSize != null && splitSize.getText() != null && !TextUtils.isEmpty(splitSize.getText().toString()) ? splitSize.getText().toString() : "1"), 4))
+                Integer.parseInt(splitSize != null && splitSize.getText() != null && !TextUtils.isEmpty(splitSize.getText().toString()) ? splitSize.getText().toString() : "1"))
         );
     }
 }
