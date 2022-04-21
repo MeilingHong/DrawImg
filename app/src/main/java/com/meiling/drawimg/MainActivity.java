@@ -5,8 +5,10 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private volatile boolean isFinish = false;
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private DrawImage show;
+    private EditText splitSize;
     private SplitImage423Impl splitImage;
 
     @Override
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         show = findViewById(R.id.show);// 显示的View
+        show.getLayoutParams().width = 1024;
+        show.getLayoutParams().height = 1024;
+
+        splitSize = findViewById(R.id.splitSize);
     }
 
     public void createImg(View v) {
@@ -41,18 +48,18 @@ public class MainActivity extends AppCompatActivity {
         if (splitImage == null) {
             splitImage = new SplitImage423Impl();
         }
-        final int width = 500;
-        final int height = 500;
+        final int width = 1024;
+        final int height = 1024;
         RectF bg = new RectF(0, 0, width, height);
-        List<RectF> list = splitImage.generateSplitRectangle(width, height, 2, 4);
+        List<RectF> list = splitImage.generateSplitRectangle(width, height, 2, Math.min(Integer.parseInt(splitSize != null && splitSize.getText() != null && !TextUtils.isEmpty(splitSize.getText().toString()) ? splitSize.getText().toString() : "1"),4));
         List<Integer> colorList = new ArrayList<>();
         colorList.add(Color.parseColor("#ff3296fa"));
         colorList.add(Color.parseColor("#bb3296fa"));
         colorList.add(Color.parseColor("#993296fa"));
         colorList.add(Color.parseColor("#773296fa"));
         colorList.add(Color.parseColor("#553296fa"));
+        Log.e("AndroidRuntime", new GsonBuilder().disableHtmlEscaping().create().toJson(colorList));
         show.setParameters(list, colorList, bg, Color.parseColor("#FF935D"));
-        show.invalidate();
 //        Log.e("AndroidRuntime", new GsonBuilder().disableHtmlEscaping().create().toJson(list));
     }
 }

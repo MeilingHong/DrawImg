@@ -47,7 +47,6 @@ public class DrawImage extends androidx.appcompat.widget.AppCompatImageView {
 
     private void initPaint() {
         mPaint = new Paint();
-        mPaint.setColor(Color.WHITE);// 默认白色画笔
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
     }
@@ -57,6 +56,7 @@ public class DrawImage extends androidx.appcompat.widget.AppCompatImageView {
         this.mColorBg = mColorBg;
         this.mBg = mBg;
         this.bgColor = bgColor;
+        invalidate();
     }
 
     @Override
@@ -64,18 +64,13 @@ public class DrawImage extends androidx.appcompat.widget.AppCompatImageView {
         super.onDraw(canvas);
         Log.e("AndroidRuntime", "---------------------------------");
         // 先整体绘制黑色背景
-        if (mBg != null) {
-            if (bgColor != 0) mPaint.setColor(bgColor);
-            canvas.drawRect(mBg, mPaint);
+        if (mList == null || mList.size() < 1) {
+            return;
         }
-
-        if (mList != null && mList.size() > 0) {
-            for (RectF temp : mList) {
-                int i = mList.indexOf(temp);
-                mPaint.setColor(mColorBg != null && mColorBg.size() > i && mColorBg.get(i) != 0 ? mColorBg.get(i) : Color.WHITE);
-                canvas.drawRect(temp, mPaint);
-                Log.e("AndroidRuntime", "index:" + i + "<-->" + mGson.toJson(mList.get(i)) + "<--->" + mPaint.getColor());
-            }
+        for (RectF temp : mList) {
+            mPaint.setColor(mColorBg != null && mColorBg.size() > 0 && mColorBg.get(0) != 0 ? mColorBg.get(0) : Color.WHITE);
+            canvas.drawRect(temp, mPaint);
+//            Log.e("AndroidRuntime", "index:" + "<-->" + mGson.toJson(temp) + "<--->" + mPaint.getColor());
         }
     }
 }
