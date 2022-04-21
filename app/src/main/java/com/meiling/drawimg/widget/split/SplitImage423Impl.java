@@ -1,4 +1,4 @@
-package com.meiling.drawimg.factory.impl;
+package com.meiling.drawimg.widget.split;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,8 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.widget.ImageView;
-
-import com.meiling.drawimg.factory.ImageSplitInterface;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.meiling.drawimg.factory;
+package com.meiling.drawimg.widget.split;
 
 import android.content.Context;
 import android.graphics.Bitmap;

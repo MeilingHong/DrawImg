@@ -1,4 +1,4 @@
-package com.meiling.drawimg.factory;
+package com.meiling.drawimg.widget.split;
 
 /**
  * 分割图片的工厂类
